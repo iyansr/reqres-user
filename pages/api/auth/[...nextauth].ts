@@ -6,7 +6,6 @@ import { API_URL } from '@modules/shared/config'
 import { AuthResult, Credentials } from '@modules/shared/types'
 
 export const authOptions: NextAuthOptions = {
-  // Configure one or more authentication providers
   session: {
     strategy: 'jwt',
   },
@@ -38,7 +37,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   pages: {
-    signIn: '/auth/signin',
+    signIn: '/signin',
   },
 
   callbacks: {
