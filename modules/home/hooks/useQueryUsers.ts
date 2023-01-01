@@ -9,7 +9,7 @@ type Params = {
   signal?: GenericAbortSignal
 }
 
-const fetch = async ({ page, per_page, signal }: Params) => {
+export const fetchUsers = async ({ page, per_page, signal }: Params) => {
   const response: AxiosResponse<GeneralResponse<User>> = await axios.request({
     method: 'GET',
     url: '/users',
@@ -24,7 +24,7 @@ const fetch = async ({ page, per_page, signal }: Params) => {
 }
 
 const useQueryUsers = ({ page = 1, per_page = 4 }: Params) => {
-  return useQuery(['users', page, per_page], ({ signal }) => fetch({ page, per_page, signal }), {
+  return useQuery(['users', page, per_page], ({ signal }) => fetchUsers({ page, per_page, signal }), {
     keepPreviousData: true,
   })
 }

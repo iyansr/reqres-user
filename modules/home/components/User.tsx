@@ -30,9 +30,11 @@ const User = () => {
         <div className="text-center">
           <h2 className="text-lg font-semibold text-indigo-600">Hello {`👋`}</h2>
           <p className="mt-1 text-2xl font-bold tracking-tight text-gray-900 ">Please Sign In to get more access</p>
-          <Link href="/signin" className="mx-auto">
-            <Button className="w-40 mx-auto mt-6">Sign in</Button>
-          </Link>
+          <div className=" w-40 mx-auto">
+            <Link href="/signin">
+              <Button className="w-40 mx-auto mt-6">Sign in</Button>
+            </Link>
+          </div>
         </div>
       </Wrapper>
     )

@@ -38,10 +38,7 @@ const ListUser = () => {
           ))}
         </div>
 
-        <nav
-          className="flex items-center mt-12 justify-between border-t border-gray-200 bg-white py-3 "
-          aria-label="Pagination"
-        >
+        <nav className="flex items-center mt-12 justify-between border-t border-gray-200 bg-white py-3 ">
           <div className="flex flex-1 justify-between ">
             <Button
               onClick={handlePrevious}
