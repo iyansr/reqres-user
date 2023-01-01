@@ -1,5 +1,5 @@
 import create from 'zustand'
-import { devtools, persist, createJSONStorage } from 'zustand/middleware'
+import { persist, createJSONStorage } from 'zustand/middleware'
 
 type LikeState = {
   userIds: number[]
