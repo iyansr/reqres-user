@@ -7,6 +7,7 @@ import { SubmitHandler } from 'react-hook-form/dist/types'
 import Input from '@modules/shared/components/Input'
 import { Credentials } from '@modules/shared/types'
 import useMutateSignin from '../hooks/useMutateSignin'
+import Button from '@modules/shared/components/Button'
 
 const schema = z.object({
   email: z.string().email().min(2),
@@ -34,13 +35,9 @@ const Form = () => {
       <Input label="Password" {...register('password')} errorMessage={errors?.password?.message} />
 
       <div>
-        <button
-          disabled={isLoading}
-          type="submit"
-          className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-        >
+        <Button disabled={isLoading} className="w-full" type="submit">
           {isLoading ? 'Loading...' : 'Sign in'}
-        </button>
+        </Button>
       </div>
 
       <div>{error ? <p className="text-red-500 text-center text-sm">{error?.error}</p> : null}</div>
