@@ -1,9 +1,9 @@
 import NextAuth, { type NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import Axios, { type AxiosResponse } from 'axios'
+import { type AxiosResponse } from 'axios'
 
-import { API_URL } from '@modules/shared/config'
 import { AuthResult, Credentials } from '@modules/shared/types'
+import axios from '@modules/shared/lib/Axios'
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -16,10 +16,9 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         const { email, password } = credentials as Credentials
         try {
-          const response: AxiosResponse<AuthResult, any> = await Axios.request({
+          const response: AxiosResponse<AuthResult, any> = await axios.request({
             method: 'POST',
-            baseURL: API_URL,
-            url: 'login',
+            url: '/login',
             data: {
               email,
               password,

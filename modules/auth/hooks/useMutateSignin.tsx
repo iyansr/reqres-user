@@ -1,7 +1,7 @@
 import { Credentials } from '@modules/shared/types'
 import { signIn, type SignInResponse } from 'next-auth/react'
 import { useRouter } from 'next/router'
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 
 const useMutateSignin = () => {
   const router = useRouter()

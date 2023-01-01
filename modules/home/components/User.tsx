@@ -30,11 +30,8 @@ const User = () => {
         <div className="text-center">
           <h2 className="text-lg font-semibold text-indigo-600">Hello {`👋`}</h2>
           <p className="mt-1 text-2xl font-bold tracking-tight text-gray-900 ">Please Sign In to get more access</p>
-          <Link
-            href="/signin"
-            className="flex w-40 mx-auto mt-6 justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-          >
-            Sign In
+          <Link href="/signin" className="mx-auto">
+            <Button className="w-40 mx-auto mt-6">Sign in</Button>
           </Link>
         </div>
       </Wrapper>
@@ -46,7 +43,7 @@ const User = () => {
       <div className="text-center">
         <h2 className="text-lg font-semibold text-indigo-600">Hello {`👋`}</h2>
         <p className="mt-1 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl ">{data?.user?.email}</p>
-        <Button onClick={() => signOut({ redirect: false })} className="w-40">
+        <Button onClick={() => signOut({ redirect: false })} className="w-40 mx-auto mt-6">
           Sign Out
         </Button>
       </div>
