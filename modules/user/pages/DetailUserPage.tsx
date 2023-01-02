@@ -19,6 +19,7 @@ const DetailUserPage = () => {
 
   const user = data?.data
   const liked = userIds.includes(user?.id as number)
+  const fullName = `${user?.first_name} ${user?.last_name}`
 
   const handleClick = () => {
     if (status === 'unauthenticated' || status === 'loading') {
@@ -26,7 +27,13 @@ const DetailUserPage = () => {
       return
     }
 
-    toggleLike(user?.id as number)
+    toggleLike(user?.id as number, (isLiked) => {
+      if (isLiked) {
+        toast.success(`You Liked ${fullName}`)
+        return
+      }
+      toast.success(`You Disliked ${fullName}`)
+    })
   }
 
   if (isLoading) {
@@ -84,12 +91,9 @@ const DetailUserPage = () => {
 
       <div>
         <p>
-          <strong>
-            {user?.first_name} {user?.last_name}
-          </strong>{' '}
-          is a Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit sed veritatis asperiores rerum deleniti
-          esse voluptates qui expedita provident accusantium quae tempore, ad reprehenderit officiis ut nobis eius hic
-          non
+          <strong>{fullName}</strong> is a Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit sed veritatis
+          asperiores rerum deleniti esse voluptates qui expedita provident accusantium quae tempore, ad reprehenderit
+          officiis ut nobis eius hic non
         </p>
       </div>
     </div>

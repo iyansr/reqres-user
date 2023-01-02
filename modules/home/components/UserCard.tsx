@@ -14,8 +14,10 @@ type Props = {
 
 const UserCard = ({ user }: Props) => {
   const { userIds, toggleLike } = useLikeStore()
-  const liked = userIds.includes(user.id)
   const { status } = useSession()
+
+  const liked = userIds.includes(user.id)
+  const fullName = `${user.first_name} ${user.last_name}`
 
   const handleClick = () => {
     if (status === 'unauthenticated' || status === 'loading') {
@@ -23,7 +25,13 @@ const UserCard = ({ user }: Props) => {
       return
     }
 
-    toggleLike(user.id)
+    toggleLike(user.id, (isLiked) => {
+      if (isLiked) {
+        toast.success(`You Liked ${fullName}`)
+        return
+      }
+      toast.success(`You Disliked ${fullName}`)
+    })
   }
 
   return (
@@ -43,9 +51,7 @@ const UserCard = ({ user }: Props) => {
       <div className="flex items-center">
         <div className="flex-1">
           <h3 className="mt-4 text-base text-indigo-700">{user.email}</h3>
-          <p className="mt-1 text-lg font-medium text-gray-900">
-            {user.first_name} {user.last_name}
-          </p>
+          <p className="mt-1 text-lg font-medium text-gray-900">{fullName}</p>
         </div>
         <div>
           <button

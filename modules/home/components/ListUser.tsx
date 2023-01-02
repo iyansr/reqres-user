@@ -1,7 +1,6 @@
 import Button from '@modules/shared/components/Button'
 import classNames from 'classnames'
-import Image from 'next/image'
-import React, { useState } from 'react'
+import React from 'react'
 import { usePageStore } from '../hooks/usePaginated'
 import useQueryUsers from '../hooks/useQueryUsers'
 import UserCard from './UserCard'
