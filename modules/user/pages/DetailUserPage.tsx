@@ -45,7 +45,7 @@ const DetailUserPage = () => {
   }
 
   return (
-    <div className="min-h-screen max-w-screen-md mx-auto">
+    <div className="min-h-screen max-w-screen-md mx-auto px-6 pb-6">
       <div className="mt-12">
         <Link href="/">
           <Button>← Back</Button>
