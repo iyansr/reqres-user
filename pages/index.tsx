@@ -8,15 +8,21 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const page = 1
   const per_page = 4
 
-  await queryClient.prefetchQuery({
-    queryKey: ['users', page, per_page],
-    queryFn: ({ signal }) => fetchUsers({ page, per_page, signal }),
-  })
+  try {
+    await queryClient.prefetchQuery({
+      queryKey: ['users', page, per_page],
+      queryFn: ({ signal }) => fetchUsers({ page, per_page, signal }),
+    })
 
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
+    return {
+      props: {
+        dehydratedState: dehydrate(queryClient),
+      },
+    }
+  } catch (error) {
+    return {
+      notFound: true,
+    }
   }
 }
 

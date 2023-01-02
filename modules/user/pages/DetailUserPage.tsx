@@ -3,6 +3,7 @@ import Button from '@modules/shared/components/Button'
 import HeartIcon from '@modules/shared/components/HeartIcon'
 import classNames from 'classnames'
 import { useSession } from 'next-auth/react'
+import Error from 'next/error'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -15,7 +16,7 @@ const DetailUserPage = () => {
   const { userIds, toggleLike } = useLikeStore()
   const { status } = useSession()
 
-  const { data, isLoading } = useQueyDetailUser(router.query?.userId as string)
+  const { data, isLoading, isError } = useQueyDetailUser(router.query?.userId as string)
 
   const user = data?.data
   const liked = userIds.includes(user?.id as number)
@@ -43,6 +44,8 @@ const DetailUserPage = () => {
       </div>
     )
   }
+
+  if (isError) return <Error statusCode={404} />
 
   return (
     <div className="min-h-screen max-w-screen-md mx-auto px-6 pb-6">
