@@ -3,6 +3,7 @@ import { User } from '@modules/shared/types'
 import classNames from 'classnames'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 import { toast } from 'react-hot-toast'
 import useLikeStore from '../hooks/useLikeStore'
@@ -12,7 +13,7 @@ type Props = {
 }
 
 const UserCard = ({ user }: Props) => {
-  const { userIds, like, unLike } = useLikeStore()
+  const { userIds, toggleLike } = useLikeStore()
   const liked = userIds.includes(user.id)
   const { status } = useSession()
 
@@ -22,18 +23,13 @@ const UserCard = ({ user }: Props) => {
       return
     }
 
-    if (liked) {
-      unLike(user.id)
-      return
-    }
-
-    like(user.id)
+    toggleLike(user.id)
   }
 
   return (
     <div>
-      <a href={`/${user.id}`} className="group transition-all">
-        <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
+      <Link href={`/${user.id}`} className="group transition-all">
+        <div className="aspect-square w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
           <Image
             src={user.avatar}
             alt={user.email}
@@ -42,11 +38,11 @@ const UserCard = ({ user }: Props) => {
             height={300}
           />
         </div>
-      </a>
+      </Link>
 
       <div className="flex items-center">
         <div className="flex-1">
-          <h3 className="mt-4 text-base text-gray-700">{user.email}</h3>
+          <h3 className="mt-4 text-base text-indigo-700">{user.email}</h3>
           <p className="mt-1 text-lg font-medium text-gray-900">
             {user.first_name} {user.last_name}
           </p>

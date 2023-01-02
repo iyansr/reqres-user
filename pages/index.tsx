@@ -5,7 +5,13 @@ import { GetServerSideProps } from 'next'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const queryClient = new QueryClient()
-  await queryClient.prefetchQuery(['users'], () => fetchUsers({ page: 1, per_page: 4 }))
+  const page = 1
+  const per_page = 4
+
+  await queryClient.prefetchQuery({
+    queryKey: ['users', page, per_page],
+    queryFn: ({ signal }) => fetchUsers({ page, per_page, signal }),
+  })
 
   return {
     props: {

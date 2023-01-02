@@ -3,8 +3,7 @@ import { persist, createJSONStorage } from 'zustand/middleware'
 
 type LikeState = {
   userIds: number[]
-  like: (id: number) => void
-  unLike: (id: number) => void
+  toggleLike: (id: number) => void
   restore: () => void
 }
 
@@ -12,30 +11,21 @@ const useLikeStore = create<LikeState>()(
   persist(
     (set) => ({
       userIds: [],
-      like: (id) =>
+      toggleLike: (id) =>
         set((state) => {
           if (!state.userIds.includes(id)) {
             return {
               userIds: [...state.userIds, id],
             }
           }
+
+          const temp = [...state.userIds]
+          const result = temp.filter((currentId) => currentId !== id)
           return {
-            userIds: state.userIds,
+            userIds: result,
           }
         }),
-      unLike: (id) =>
-        set((state) => {
-          if (state.userIds.includes(id)) {
-            const temp = [...state.userIds]
-            const result = temp.filter((currentId) => currentId !== id)
-            return {
-              userIds: result,
-            }
-          }
-          return {
-            userIds: state.userIds,
-          }
-        }),
+
       restore: () => set(() => ({ userIds: [] })),
     }),
     {

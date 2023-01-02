@@ -28,3 +28,8 @@ export type GeneralResponse<T> = {
   data: T[]
   support: Support
 }
+
+export type DetailResponse<T> = {
+  data: T
+  support: Support
+}
