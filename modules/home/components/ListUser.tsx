@@ -2,22 +2,13 @@ import Button from '@modules/shared/components/Button'
 import classNames from 'classnames'
 import Image from 'next/image'
 import React, { useState } from 'react'
+import { usePageStore } from '../hooks/usePaginated'
 import useQueryUsers from '../hooks/useQueryUsers'
 import UserCard from './UserCard'
 
 const ListUser = () => {
-  const [page, setPage] = useState<number>(1)
+  const { page, onNextPage, onPreviousPage } = usePageStore()
   const { data, isLoading } = useQueryUsers({ page })
-
-  const handleNext = () => {
-    setPage((prev) => prev + 1)
-  }
-
-  const handlePrevious = () => {
-    if (page > 1) {
-      setPage((prev) => prev - 1)
-    }
-  }
 
   if (isLoading) {
     return (
@@ -41,7 +32,7 @@ const ListUser = () => {
         <nav className="flex items-center mt-12 justify-between border-t border-gray-200 bg-white py-3 ">
           <div className="flex flex-1 justify-between ">
             <Button
-              onClick={handlePrevious}
+              onClick={onPreviousPage}
               disabled={page === 1}
               className={classNames({
                 grayscale: page === 1,
@@ -50,7 +41,7 @@ const ListUser = () => {
               Previous
             </Button>
             <Button
-              onClick={handleNext}
+              onClick={onNextPage}
               disabled={page === data?.total_pages}
               className={classNames({
                 grayscale: page === data?.total_pages,
