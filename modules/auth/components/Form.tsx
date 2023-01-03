@@ -32,7 +32,7 @@ const Form = () => {
   return (
     <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
       <Input label="Email Address" {...register('email')} errorMessage={errors?.email?.message} />
-      <Input label="Password" {...register('password')} errorMessage={errors?.password?.message} />
+      <Input label="Password" type="password" {...register('password')} errorMessage={errors?.password?.message} />
 
       <div>
         <Button disabled={isLoading} className="w-full" type="submit">
